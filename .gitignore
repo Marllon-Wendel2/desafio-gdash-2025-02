@@ -5,11 +5,9 @@ docker-compose.yml
 /logs
 /.docker
 
-# -- Python (weather-collector) ---
 /weather-collector/__pycache__
 /weather-collector/.venv
 /weather-collector/venv
 /weather-collector/.pytest_cache
 
-# --- Pasta Go (queue-worker) ---
 /queue-worker/worker # Se o binário compilado se chamar 'worker'

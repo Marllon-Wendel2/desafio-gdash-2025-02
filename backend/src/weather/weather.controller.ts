@@ -5,7 +5,7 @@ import { WeatherService } from './weather.service';
 export class WeatherController {
   constructor(private readonly weatherService: WeatherService) {}
 
-  @Get('')
+  @Get()
   getWeather() {
     return this.weatherService.getWeather();
   }

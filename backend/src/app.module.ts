@@ -1,25 +1,22 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { DbService } from './db/db.service';
+import { ConfigModule } from '@nestjs/config';
+
+import { UsersModule } from './users/users.module';
+
+import { WeatherSchema } from './weather/interfaces/weather.schema';
+import { WeatherModule } from './weather/weather.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-
-    MongooseModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
-        uri: configService.get<string>('MONGODB_URI'),
-        authSource: 'admin',
-        dbName: 'dashweather',
-      }),
-      inject: [ConfigService],
-    }),
+    MongooseModule.forRoot(process.env.MONGO_URI ?? ''),
+    MongooseModule.forFeature([{ name: 'Weather', schema: WeatherSchema }]),
+    UsersModule,
+    WeatherModule,
   ],
   controllers: [],
-  providers: [DbService],
 })
 export class AppModule {}
