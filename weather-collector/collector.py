@@ -14,14 +14,13 @@ LATITUDE = -8.03
 LONGITUDE = -34.97
 LOCATION_NAME = "Camaragibe, PE"
 
-# --- DEBUG START ---
 print(f"DEBUG: Tentando conectar em {REDIS_HOST}:{REDIS_PORT}")
 if REDIS_PASS:
     print("DEBUG: Senha Redis lida com sucesso (Valor Oculto: SIM)")
 else:
     print("ERRO CRÍTICO: Variável REDIS_PASS não foi lida!")
     exit(1)
-# --- DEBUG END ---
+
 
 try:
     r = redis.Redis(host=REDIS_HOST, port=REDIS_PORT, password=REDIS_PASS, decode_responses=True)
@@ -29,7 +28,6 @@ try:
     print("Conexão com Redis estabelecida com sucesso!")
 except Exception as e:
     print(f"Erro ao conectar com Redis: {e}")
-    # Se falhar aqui, o container morre.
     exit(1) 
 
 def collect_and_publish_weather_data():

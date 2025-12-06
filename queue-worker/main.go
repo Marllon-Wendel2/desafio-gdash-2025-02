@@ -131,6 +131,6 @@ func processAndSave(collection *mongo.Collection, messageJSON string) error {
 		return fmt.Errorf("falha ao inserir no MongoDB: %w", err)
 	}
 
-	log.Printf("✅ Log de clima salvo: %s (ID: %v)", logData.LocationName, result.InsertedID)
+	log.Printf("Log de clima salvo: %s (ID: %v)", logData.LocationName, result.InsertedID)
 	return nil
 }
