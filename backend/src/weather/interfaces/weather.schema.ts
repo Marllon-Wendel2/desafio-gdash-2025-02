@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose';
+import * as mongoose from "mongoose";
 
 export const WeatherSchema = new mongoose.Schema(
   {
@@ -12,5 +12,5 @@ export const WeatherSchema = new mongoose.Schema(
     weatherCode: Number,
     precipitationProbability: Number,
   },
-  { collection: 'weather_logs' },
+  { collection: "weather_logs" }
 );
