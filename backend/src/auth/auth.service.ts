@@ -21,16 +21,38 @@ export class AuthService {
   }
 
   async login(userName: string, password: string) {
-    console.log(userName);
-    console.log(password);
     const user = await this.validateUser(userName, password);
-    console.log("user", user);
 
-    const payload = { sub: user._id, userName: user.userName };
-    const token = jwt.sign(payload, process.env.JWT_SECRET || "secret", {
+    // Converter ObjectId para string
+    const userId = user._id.toString();
+
+    const payload = {
+      sub: userId,
+      userName: user.userName,
+    };
+
+    const secret = process.env.JWT_SECRET || "secret";
+
+    const token = jwt.sign(payload, secret, {
       expiresIn: "1h",
     });
 
-    return { accessToken: token };
+    return {
+      accessToken: token,
+      user: {
+        id: userId,
+        userName: user.userName,
+      },
+    };
+  }
+
+  // Método para verificar um token (útil para debug)
+  verifyToken(token: string) {
+    try {
+      const secret = process.env.JWT_SECRET || "secret";
+      return jwt.verify(token, secret);
+    } catch (error) {
+      throw new UnauthorizedException("Token inválido");
+    }
   }
 }

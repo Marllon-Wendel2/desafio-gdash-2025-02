@@ -5,6 +5,8 @@ import { UsersModule } from "./users/users.module";
 import { WeatherModule } from "./weather/weather.module";
 import { AuthModule } from "./auth/auth.module";
 import { GeminiModule } from "./gemini/gemini.module";
+import { APP_GUARD } from "@nestjs/core";
+import { JwtAuthGuard } from "./auth/jwt-auth.guard";
 
 @Module({
   imports: [
@@ -18,5 +20,6 @@ import { GeminiModule } from "./gemini/gemini.module";
     GeminiModule,
   ],
   controllers: [],
+  providers: [{ provide: APP_GUARD, useClass: JwtAuthGuard }],
 })
 export class AppModule {}

@@ -18,6 +18,14 @@ export async function main(prompt: string) {
       - não tente adivinhar dados ausentes
       - seja direto e específico
 
+      Ideias:
+       - Cálculo de média de temperatura e umidade em determinados períodos;
+       - Detecção de tendência (temperaturas subindo ou caindo);
+       - Pontuação de conforto climático (0–100);
+       - Classificação do dia: “frio”, “quente”, “agradável”, “chuvoso”;
+       - Alertas: “Alta chance de chuva”, “Calor extremo”, “Frio intenso”;
+       - Geração de resumos em texto (ex.: “Nos últimos 3 dias, a temperatura média foi de 28°C, com alta umidade e tendência de chuva no fim da tarde.”).
+
       Formato de resposta (obrigatório):
       {
         "insights": [
