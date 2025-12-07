@@ -1,12 +1,14 @@
-import { Controller, Get, Param, Res } from "@nestjs/common";
+import { Controller, Get, Param, Res, UseGuards } from "@nestjs/common";
 import { WeatherService } from "./weather.service";
 import type { Response } from "express";
+import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 
 @Controller("weather")
 export class WeatherController {
   constructor(private readonly weatherService: WeatherService) {}
 
   @Get()
+  @UseGuards(JwtAuthGuard)
   getWeather() {
     return this.weatherService.getWeather();
   }

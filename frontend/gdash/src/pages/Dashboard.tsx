@@ -1,3 +1,8 @@
+'use client'
+
+import { showToast } from "../lib/toast";
+import weatherService from "../service/weather";
+import { useEffect, useState } from "react";
 
 type WeatherData = {
   _id: string;
@@ -12,22 +17,27 @@ type WeatherData = {
   precipitationProbability: number;
 };
 
-const data: WeatherData[] = [
-  {
-    _id: "6930eda0f3eb509218897c7b",
-    timestamp: "2025-11-24T23:00",
-    locationName: "Camaragibe, PE",
-    latitude: -8.03,
-    longitude: -34.97,
-    temperatureC: 23.5,
-    humidityPercent: 88,
-    windSpeed: 1.8,
-    weatherCode: 2,
-    precipitationProbability: 13,
-  },
-];
-
 export default function Dashboard() {
+    const [data, setData] = useState<WeatherData[]>([]);
+
+    useEffect(() => { console.log(data)}, [data]);
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+            const res = await weatherService.getWeather();
+            setData(res);
+            showToast("Dados carregados com sucesso!", "success");
+            } catch (err) {
+            console.error(err);
+            showToast("Erro ao carregar dados!", "error");
+            }
+        };
+
+        fetchData();
+    }, []);
+
   return (
     <div className="flex flex-col h-screen bg-[hsl(var(--background))] text-[hsl(var(--foreground))]">
       <main className="flex-1 p-6 overflow-auto">
