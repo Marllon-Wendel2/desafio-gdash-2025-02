@@ -1,13 +1,10 @@
 import { Module } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { ConfigModule } from "@nestjs/config";
-
 import { UsersModule } from "./users/users.module";
-
-import { WeatherSchema } from "./weather/interfaces/weather.schema";
 import { WeatherModule } from "./weather/weather.module";
-import { UserSchema } from "./users/interfaces/user.schema";
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from "./auth/auth.module";
+import { GeminiModule } from "./gemini/gemini.module";
 
 @Module({
   imports: [
@@ -18,6 +15,7 @@ import { AuthModule } from './auth/auth.module';
     UsersModule,
     WeatherModule,
     AuthModule,
+    GeminiModule,
   ],
   controllers: [],
 })

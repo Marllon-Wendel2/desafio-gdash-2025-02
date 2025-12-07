@@ -10,7 +10,7 @@ export class WeatherService {
   ) {}
   async getWeather() {
     try {
-      const result = await this.weatherModel.find();
+      const result = await this.weatherModel.find().limit(15).lean();
       return result;
     } catch (error) {
       console.log("Erro ao buscar clima:", error);

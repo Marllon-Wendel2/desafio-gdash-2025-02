@@ -10,5 +10,6 @@ import { WeatherSchema } from "./interfaces/weather.schema";
   ],
   controllers: [WeatherController],
   providers: [WeatherService],
+  exports: [WeatherModule, WeatherService],
 })
 export class WeatherModule {}
