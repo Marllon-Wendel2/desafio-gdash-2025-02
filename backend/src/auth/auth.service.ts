@@ -23,7 +23,6 @@ export class AuthService {
   async login(userName: string, password: string) {
     const user = await this.validateUser(userName, password);
 
-    // Converter ObjectId para string
     const userId = user._id.toString();
 
     const payload = {
@@ -42,11 +41,32 @@ export class AuthService {
       user: {
         id: userId,
         userName: user.userName,
+        name: user.userName,
       },
     };
   }
 
-  // Método para verificar um token (útil para debug)
+  async verifyTokenAndGetUser(token: string) {
+    try {
+      const secret = process.env.JWT_SECRET || "secret";
+      const decoded = jwt.verify(token, secret) as any;
+
+      const user = await this.userModel.findById(decoded.sub).exec();
+
+      if (!user) {
+        throw new UnauthorizedException("Usuário não encontrado");
+      }
+
+      return {
+        id: user._id.toString(),
+        userName: user.userName,
+        name: user.userName,
+      };
+    } catch (error) {
+      throw new UnauthorizedException("Token inválido ou expirado");
+    }
+  }
+
   verifyToken(token: string) {
     try {
       const secret = process.env.JWT_SECRET || "secret";
