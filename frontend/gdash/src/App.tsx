@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 // Components
 import AppLayout from "./components/layout/AppLayout";
 import PrivateRoute from "./components/PrivateRoute";
+import Profile from "./pages/Profile";
 
 export default function App() {
   return (
@@ -39,7 +40,7 @@ export default function App() {
           element={
             <PrivateRoute>
               <AppLayout>
-                {/* <Profile /> */}
+                <Profile />
               </AppLayout>
             </PrivateRoute>
           }
