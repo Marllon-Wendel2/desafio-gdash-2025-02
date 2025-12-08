@@ -30,10 +30,10 @@ export default function Dashboard() {
         const fetchData = async () => {
             try {
             setLoading(true);
-            showToast("Carregando dados...", "info");
+            // showToast("Carregando dados...", "info");
             const res = await weatherService.getWeather();
             setWeatherData(res);
-            showToast("Dados carregados com sucesso!", "success");
+            // showToast("Dados carregados com sucesso!", "success");
             setLoading(false);
             } catch (err) {
             console.error(err);
